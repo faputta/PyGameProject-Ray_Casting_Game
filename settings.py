@@ -12,7 +12,7 @@ FPS = 60
 
 player_pos = (HALF_WIDTH, HALF_HEIGHT)
 player_angle = 0
-player_speed = 3
+player_speed = 4
 
 FIELD_OF_VIEW = pi / 3
 HALF_FIELD_OF_VIEW = FIELD_OF_VIEW / 2
