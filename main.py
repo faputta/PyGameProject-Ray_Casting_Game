@@ -27,7 +27,7 @@ def main():
 
         player.movements()
         screen.fill((0, 0, 0))
-        drawing.background()
+        drawing.background(player_angle)
         ray_casting(screen, player.pos, player.angle, drawing.textures)
 
         drawing.mini_map(player)

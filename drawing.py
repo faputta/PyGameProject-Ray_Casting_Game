@@ -2,7 +2,7 @@ import pygame
 import os
 from settings import *
 from ray_casting import ray_casting
-from math import sin, cos
+from math import sin, cos, degrees
 from map import game_map, mini_map
 
 
@@ -12,10 +12,13 @@ class Drawing:
         self.mini_map_screen = mini_map_screen
         self.font = pygame.font.SysFont('Arial', 36, bold=True)
         self.textures = {1: Drawing.load_image(self, 'wall.png'),
-                         's': Drawing.load_image(self, 'sky.png')}
+                         'S': Drawing.load_image(self, 'sky.png')}
 
-    def background(self):
-        pygame.draw.rect(self.screen, (80, 0, 30), (0, 0, WIDTH, HALF_HEIGHT))
+    def background(self, angle):
+        sky_offset = -5 * degrees(angle) % WIDTH
+        self.screen.blit(self.textures['S'], (sky_offset, 0))
+        self.screen.blit(self.textures['S'], (sky_offset - WIDTH, 0))
+        self.screen.blit(self.textures['S'], (sky_offset + WIDTH, 0))
         pygame.draw.rect(self.screen, (80, 80, 80), (0, HALF_HEIGHT, WIDTH, HALF_HEIGHT))
 
     def environment(self, player_pos, player_angle):
