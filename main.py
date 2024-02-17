@@ -25,6 +25,7 @@ def main():
             if event.type == pygame.QUIT or pygame.key.get_pressed()[pygame.K_ESCAPE]:
                 running = False
 
+        player.mouse()
         player.movements()
         screen.fill((0, 0, 0))
         drawing.background(player_angle)

@@ -11,8 +11,8 @@ class Drawing:
         self.screen = screen
         self.mini_map_screen = mini_map_screen
         self.font = pygame.font.SysFont('Arial', 36, bold=True)
-        self.textures = {1: Drawing.load_image(self, 'wall.png'),
-                         'S': Drawing.load_image(self, 'sky.png')}
+        self.textures = {1: Drawing.load_image(self, 'textures\wall.png'),
+                         'S': Drawing.load_image(self, 'textures\sky.png')}
 
     def background(self, angle):
         sky_offset = -5 * degrees(angle) % WIDTH

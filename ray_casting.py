@@ -9,7 +9,8 @@ def converting(first, second):
     return first // TILE * TILE, second // TILE * TILE
 
 
-def ray_casting(screen, player_pos, player_angle, textures):
+def ray_casting(player_pos, player_angle, textures):
+    walls = []
     texture_v, texture_h = 1, 1
     x_p, y_p = player_pos
     pos_in_block = {'left': x_p - x_p // TILE * TILE,
@@ -63,7 +64,8 @@ def ray_casting(screen, player_pos, player_angle, textures):
         textures[texture].set_alpha(int(display_height * 255))
         wall_column = textures[texture].subsurface(offset * TEXTURE_SCALE, 0, TEXTURE_SCALE, TEXTURE_WIDTH)
         wall_column = pygame.transform.scale(wall_column, (SCALE, int(display_height))).convert_alpha()
-        screen.blit(wall_column, (ray * SCALE, HALF_HEIGHT - display_height // 2))
+        wall_pos = (ray * SCALE, HALF_HEIGHT - display_height // 2)
+        walls.append((DISTANCE, wall_column, wall_pos))
 
         # ray_length += cos(player_angle - cur_angle)
         # display_height = DISPLAY_COEF / (ray_length + 0.00001)
