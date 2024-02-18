@@ -11,8 +11,8 @@ class Sprites:
             'purple_planet': {
                 'sprite': pygame.image.load('data/decorating sprites/11 planets/methane-barren.png').convert_alpha(),
                 'angles_of_view': None,
-                'shift': 1.5,
-                'scale': 0.7,
+                'shift': 0.8,
+                'scale': 1.2,
                 'animation': False,
                 'start_animation_dist': 800,
                 'animation_speed': 10
@@ -21,7 +21,7 @@ class Sprites:
             'red_planet': {
                 'sprite': pygame.image.load('data/decorating sprites/11 planets/desert.png').convert_alpha(),
                 'angles_of_view': None,
-                'shift': 1.5,
+                'shift': 0.8,
                 'scale': 0.7,
                 'animation': False,
                 'start_animation_dist': 800,
@@ -31,8 +31,8 @@ class Sprites:
             'grey_planet': {
                 'sprite': pygame.image.load('data/decorating sprites/11 planets/barren-charred.png').convert_alpha(),
                 'angles_of_view': None,
-                'shift': 1.5,
-                'scale': 0.8,
+                'shift': 0.8,
+                'scale': 0.9,
                 'animation': False,
                 'start_animation_dist': 800,
                 'animation_speed': 10
@@ -40,7 +40,7 @@ class Sprites:
             'red_dragon': {
                 'sprite': pygame.image.load(f'data/red dragon/tile0.png').convert_alpha(),
                 'angles_of_view': None,
-                'shift': 1.5,
+                'shift': 0.8,
                 'scale': 0.7,
                 'animation': deque(
                     [pygame.image.load(f'data/red dragon/tile{i}.png').convert_alpha() for i in range(2)]
@@ -51,8 +51,8 @@ class Sprites:
             'grey_dragon': {
                 'sprite': pygame.image.load(f'data/grey dragon/tile0.png').convert_alpha(),
                 'angles_of_view': None,
-                'shift': 1.5,
-                'scale': 0.7,
+                'shift': 0.6,
+                'scale': 0.9,
                 'animation': deque(
                     [pygame.image.load(f'data/grey dragon/tile{i}.png').convert_alpha() for i in range(3)]
                 ),
@@ -62,7 +62,7 @@ class Sprites:
         }
 
         self.sprite_objects = [
-            Object(self.sprites_parameters['purple_planet'], (5.8, 2.4)),
+            Object(self.sprites_parameters['purple_planet'], (5.4, 2.0)),
             Object(self.sprites_parameters['red_planet'], (9.7, 7.4)),
             Object(self.sprites_parameters['grey_planet'], (13.7, 7.4)),
             Object(self.sprites_parameters['red_dragon'], (7.7, 7.4)),
