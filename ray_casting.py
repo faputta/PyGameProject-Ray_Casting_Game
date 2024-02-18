@@ -3,23 +3,24 @@ import player
 from settings import *
 from map import game_map
 from math import sin, cos
+from map import MAP_WIDTH, MAP_HEIGHT, game_map
 
 
 def converting(first, second):
     return first // TILE * TILE, second // TILE * TILE
 
 
-def ray_casting(player_pos, player_angle, textures):
+def ray_casting(player, textures):
     walls = []
     texture_v, texture_h = 1, 1
-    x_p, y_p = player_pos
+    x_p, y_p = player.pos
     pos_in_block = {'left': x_p - x_p // TILE * TILE,
                     'top': y_p - y_p // TILE * TILE,
                     'right': TILE - (x_p - x_p // TILE * TILE),
                     'bottom': TILE - (y_p - y_p // TILE * TILE)}
 
     for ray in range(NUMBER_OF_RAYS):
-        cur_angle = player_angle - HALF_FIELD_OF_VIEW + ANGLE_BETWEEN_RAYS * ray
+        cur_angle = player.angle - HALF_FIELD_OF_VIEW + ANGLE_BETWEEN_RAYS * ray
         cos_ray, sin_ray = cos(cur_angle), sin(cur_angle)
         vd, hd = float('inf'), float('inf')
 
@@ -65,7 +66,10 @@ def ray_casting(player_pos, player_angle, textures):
         wall_column = textures[texture].subsurface(offset * TEXTURE_SCALE, 0, TEXTURE_SCALE, TEXTURE_WIDTH)
         wall_column = pygame.transform.scale(wall_column, (SCALE, int(display_height))).convert_alpha()
         wall_pos = (ray * SCALE, HALF_HEIGHT - display_height // 2)
-        walls.append((DISTANCE, wall_column, wall_pos))
+        walls.append((ray_length, wall_column, wall_pos))
+
+    return walls
+
 
         # ray_length += cos(player_angle - cur_angle)
         # display_height = DISPLAY_COEF / (ray_length + 0.00001)

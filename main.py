@@ -2,12 +2,13 @@ import os
 import sys
 import pygame
 
+import sprite
 from settings import *
 from player import Player
-from math import sin, cos
 from map import *
 from ray_casting import ray_casting
 from drawing import Drawing
+from sprite import *
 
 pygame.init()
 
@@ -18,6 +19,7 @@ def main():
     clock = pygame.time.Clock()
     player = Player()
     drawing = Drawing(screen, mini_map_screen)
+    sprites = Sprites()
 
     running = True
     while running:
@@ -25,11 +27,11 @@ def main():
             if event.type == pygame.QUIT or pygame.key.get_pressed()[pygame.K_ESCAPE]:
                 running = False
 
-        player.mouse()
         player.movements()
         screen.fill((0, 0, 0))
-        drawing.background(player_angle)
-        ray_casting(screen, player.pos, player.angle, drawing.textures)
+        drawing.background(player.angle)
+        walls = ray_casting(player, drawing.textures)
+        drawing.world_drawing(walls + [object.sprite_location(player, walls) for object in sprites.sprite_objects])
 
         drawing.mini_map(player)
 

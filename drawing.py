@@ -11,7 +11,8 @@ class Drawing:
         self.screen = screen
         self.mini_map_screen = mini_map_screen
         self.font = pygame.font.SysFont('Arial', 36, bold=True)
-        self.textures = {1: Drawing.load_image(self, 'textures\wall.png'),
+        self.textures = {1: Drawing.load_image(self, 'textures\wall1.png'),
+                         2: Drawing.load_image(self, 'textures\wall2.png'),
                          'S': Drawing.load_image(self, 'textures\sky.png')}
 
     def background(self, angle):
@@ -21,8 +22,6 @@ class Drawing:
         self.screen.blit(self.textures['S'], (sky_offset + WIDTH, 0))
         pygame.draw.rect(self.screen, (80, 80, 80), (0, HALF_HEIGHT, WIDTH, HALF_HEIGHT))
 
-    def environment(self, player_pos, player_angle):
-        ray_casting(self.screen, player_pos, player_angle, self.textures)
 
     def mini_map(self, player):
         self.mini_map_screen.fill((0, 0, 0))
@@ -39,7 +38,13 @@ class Drawing:
     def load_image(self, name, colorkey=None):
         fullname = os.path.join('data', name)
         if not os.path.isfile(fullname):
-            print(f'Файл сизображением "{fullname}" не найден')
+            print(f'Файл с изображением "{fullname}" не найден')
             sys.exit()
         image = pygame.image.load(fullname).convert_alpha()
         return image
+
+    def world_drawing(self, world_objects):
+        for world_object in sorted(world_objects, key=lambda x: x[0], reverse=True):
+            if world_object[0]:
+                n, obj, obj_pos = world_object
+                self.screen.blit(obj, obj_pos)
